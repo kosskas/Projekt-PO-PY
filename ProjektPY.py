@@ -1,15 +1,13 @@
 from Organizm import Organizm
 from Zwierze import Zwierze
 from Zwierzeta.Owca import Owca
+from Zwierzeta.Wilk import Wilk
+from Swiat import Swiat
 
-test = Organizm()
-zw = Zwierze(3, 444)
 
-owca = Owca(1, 2)
+L = [Owca(1, 1), Owca(2,2), Owca(1, 0), Wilk(0, 0)]
 
-test.SetWiek(335)
-
-print("Projekt\n")
-print(test.GetWiek())
-print(zw.GetInicjatywa())
-print(owca.rysowanie())
+S = Swiat(3, 3, L)
+S.rysujSwiat()
+S.wykonajTure()
+S.rysujSwiat()

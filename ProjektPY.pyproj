@@ -25,10 +25,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ProjektPY.py" />
+    <Compile Include="Swiat.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Zwierze.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Zwierzeta\Owca.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Zwierzeta\Wilk.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

@@ -9,33 +9,33 @@ class Organizm:
 
     def czyOdbilAtak(self, atakujacy):
         if self.sila < atakujacy.GetSila():
-            return True
-        else:
             return False
+        else:
+            return True
 
     def rozmnazanie(self, drugi):
         if self.wiek > 2 and drugi.GetWiek() > 2:
             for dy in range(-1, 2):
                 for dx in range(-1, 2):
                     dziecko = self.swiat.pobierzWspolrzedne(self.x + dy, self.x + dx)
-                    if dziecko == None and self.swiat.sprawdzPoprawnoscWspolrzednych(y + dy, x + dx):
-                        dziecko = self.stworzNowy(y + dy, x + dx)
+                    if dziecko == None and self.swiat.sprawdzPoprawnoscWspolrzednych(self.y + dy, self.x + dx):
+                        dziecko = self.stworzNowy(self.y + dy, self.x + dx)
                         if dziecko != None:
                             self.swiat.dodajOrganizm(dziecko)
                         break
 
     def smierc(self):
-        zyje = False
+        self.zyje = False
 
     def nowaTura(self):
-        wiek = wiek + 1
+        ++self.wiek
 
     def kolizja(self, atakujacy):
         if self.czyOdbilAtak(atakujacy) == True:
-            Print(self.rysowanie()+" zabil "+atakujacy.rysowanie()+'\n')
+            print(self.rysowanie(),"zabil",atakujacy.rysowanie())
             atakujacy.smierc()
         else:
-            Print(atakujacy.rysowanie()+" zabil "+self.rysowanie()+'\n')
+            print(atakujacy.rysowanie(),"zabil",self.rysowanie())
             self.smierc()
     
     def SetSwiat(self, S):
@@ -48,7 +48,7 @@ class Organizm:
         self.wiek = wiek
 
     def czyZyje(self):
-        return self.zyje
+        return self.zyje == True
 
     def GetX(self):
         return self.x

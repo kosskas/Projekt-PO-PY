@@ -1,5 +1,5 @@
 from Organizm import Organizm
-from random import random, randrange
+import random
 
 class Zwierze(Organizm):
     nextX = None
@@ -23,6 +23,7 @@ class Zwierze(Organizm):
         self.wykonajRuchNa(kolizyjny)
         self.x = self.nextX
         self.y = self.nextY
+        print(self.rysowanie(), self.y, self.y)
 
     def wykonajRuchNa(self, kolizyjny):
         if kolizyjny != None and kolizyjny != self:
@@ -38,7 +39,7 @@ class Zwierze(Organizm):
         dy = -1
         dy = random.randrange(-1, 1)
         dx = random.randrange(-1, 1)
-        if self.swiat.sprawdzPoprawnoscWspolrzednych(y + dy, x + dx) == True:
+        if self.swiat.sprawdzPoprawnoscWspolrzednych(self.y + dy, self.x + dx) == True:
             self.nextX = self.x + dx
             self.nextY = self.y + dy
             self.prevX = self.x

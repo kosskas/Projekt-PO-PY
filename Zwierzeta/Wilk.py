@@ -1,17 +1,19 @@
 from Zwierze import Zwierze
 
-class Owca(Zwierze):
+class Wilk(Zwierze):
     def __init__(self, posY, posX, wiek=0):
-        super().__init__(4, 4)
+        super().__init__(9, 5)
         self.x = posX
         self.y = posY
         self.wiek = wiek
 
     def rysowanie(self):
-        return "O"
+        return "W"
 
     def porownajGatunek(self, drugi):
-        return isinstance(drugi, Owca)
+        return isinstance(drugi, Wilk)
     
     def stworzNowy(self, nowyY, nowyX):
-        return Owca(nowyY, nowyX)
+        return Wilk(nowyY, nowyX)
+
+
