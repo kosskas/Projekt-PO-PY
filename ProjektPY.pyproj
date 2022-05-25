@@ -25,20 +25,53 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ProjektPY.py" />
+    <Compile Include="Roslina.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rosliny\BarszczSosnowskiego.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rosliny\Guarana.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rosliny\Mlecz.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rosliny\Trawa.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rosliny\WilczeJagody.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Rosliny\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Swiat.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Zwierze.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Zwierzeta\Antylopa.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Zwierzeta\CyberOwca.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Zwierzeta\Lis.py" />
     <Compile Include="Zwierzeta\Owca.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Zwierzeta\Wilk.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Zwierzeta\Zolw.py" />
+    <Compile Include="Zwierzeta\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Rosliny\" />
     <Folder Include="Zwierzeta\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

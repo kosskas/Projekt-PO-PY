@@ -6,6 +6,10 @@ class Wilk(Zwierze):
         self.x = posX
         self.y = posY
         self.wiek = wiek
+        self.prevX = self.x
+        self.prevY = self.y
+        self.nextY = self.y
+        self.nextX = self.x
 
     def rysowanie(self):
         return "W"
@@ -15,5 +19,3 @@ class Wilk(Zwierze):
     
     def stworzNowy(self, nowyY, nowyX):
         return Wilk(nowyY, nowyX)
-
-

@@ -12,18 +12,16 @@ class Zwierze(Organizm):
         self.inicjatywa = i
         self.wiek = 0
         self.zyje = True
-        self.prevX = self.x
-        self.prevY = self.y
-        self.nexyY = self.y
-        self.nextX = self.x
+
 
     def akcja(self):
-        self.nowaPozycja()
-        kolizyjny = self.swiat.pobierzWspolrzedne(self.nextY, self.nextX)
-        self.wykonajRuchNa(kolizyjny)
-        self.x = self.nextX
-        self.y = self.nextY
-        print(self.rysowanie(), self.y, self.y)
+        if not self.wykonalRuch:
+            self.nowaPozycja()
+            kolizyjny = self.swiat.pobierzWspolrzedne(self.nextY, self.nextX)
+            self.wykonajRuchNa(kolizyjny)
+            self.x = self.nextX
+            self.y = self.nextY
+            self.wykonalRuch = True
 
     def wykonajRuchNa(self, kolizyjny):
         if kolizyjny is not None and kolizyjny != self:
@@ -35,8 +33,6 @@ class Zwierze(Organizm):
                 kolizyjny.kolizja(self)
 
     def nowaPozycja(self):
-        dx = -1
-        dy = -1
         dy = random.randrange(-1, 1)
         dx = random.randrange(-1, 1)
         if self.swiat.sprawdzPoprawnoscWspolrzednych(self.y + dy, self.x + dx):

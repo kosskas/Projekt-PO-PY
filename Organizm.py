@@ -6,6 +6,7 @@ class Organizm:
     x = None
     y = None
     zyje = None
+    wykonalRuch = None
 
     def czyOdbilAtak(self, atakujacy):
         if self.sila < atakujacy.GetSila():
@@ -28,7 +29,8 @@ class Organizm:
         self.zyje = False
 
     def nowaTura(self):
-        ++self.wiek
+        self.wiek = self.wiek + 1
+        self.wykonalRuch = False
 
     def kolizja(self, atakujacy):
         if self.czyOdbilAtak(atakujacy) == True:

@@ -36,25 +36,27 @@ class Swiat:
             N.SetSwiat(self)
 
     def naniesOrganizmyNaMape(self):
-        print("test")
         for N in self.orgaznizmy:
             if N.czyZyje() == True:
-                print(N.rysowanie(), N.GetY(), N.GetX())
-                #self.plansza[1][1] = N.rysowanie()
+                self.plansza[N.GetY()][N.GetX()] = N.rysowanie()
 
     def wyczyscMape(self):
         self.plansza = []
         for y in range(self.wymY):
             wiersz = []
             for x in range(self.wymX):
-                wiersz.append("")
+                wiersz.append(" ")
             self.plansza.append(wiersz)
 
     def rysujMape(self):
-        print(self.plansza)
+       for y in self.plansza:
+           print(*y, sep=" ")
 
-    def symuluj(self):
-        pass
+    def symuluj(self, iter):
+        for i in range(iter):
+            self.rysujSwiat()
+            print("Tura", self.tura)
+            self.wykonajTure()
 
     def zapiszSwiat(self):
         with open('zapis.txt', 'w') as f:
@@ -78,7 +80,7 @@ class Swiat:
         return x < self.wymX and x >= 0 and y < self.wymY and y >= 0
 
     def wykonajTure(self):
-        ++self.tura
+        self.tura = self.tura + 1
         self.zwolnijMiejsce()
         for N in self.orgaznizmy:
             N.nowaTura()
