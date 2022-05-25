@@ -26,8 +26,8 @@ class Zwierze(Organizm):
         print(self.rysowanie(), self.y, self.y)
 
     def wykonajRuchNa(self, kolizyjny):
-        if kolizyjny != None and kolizyjny != self:
-            if self.porownajGatunek(kolizyjny) == True:
+        if kolizyjny is not None and kolizyjny != self:
+            if self.porownajGatunek(kolizyjny):
                 self.rozmnazanie(kolizyjny)
                 self.nextX = self.x
                 self.nextY = self.y
@@ -39,7 +39,7 @@ class Zwierze(Organizm):
         dy = -1
         dy = random.randrange(-1, 1)
         dx = random.randrange(-1, 1)
-        if self.swiat.sprawdzPoprawnoscWspolrzednych(self.y + dy, self.x + dx) == True:
+        if self.swiat.sprawdzPoprawnoscWspolrzednych(self.y + dy, self.x + dx):
             self.nextX = self.x + dx
             self.nextY = self.y + dy
             self.prevX = self.x
@@ -51,3 +51,6 @@ class Zwierze(Organizm):
 
     def porownajGatunek(self, drugi):
         return isinstance(drugi, Zwierze)
+
+    def rysowanie(self):
+        pass
