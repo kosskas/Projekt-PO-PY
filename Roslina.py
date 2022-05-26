@@ -1,8 +1,9 @@
 from Organizm import Organizm
 import random
 
+
 class Roslina(Organizm):
-    szansaSiewu = None
+    szansa_siewu = None
 
     def __init__(self, s):
         self.sila = s
@@ -10,14 +11,13 @@ class Roslina(Organizm):
         self.wiek = 0
         self.zyje = True
 
-
     def akcja(self):
-        if not self.wykonalRuch:
-            if random.randrange(0, 100) <= self.szansaSiewu:
+        if not self.wykonal_ruch:
+            if random.randrange(0, 100) <= self.szansa_siewu:
                 self.rozmnazanie(self)
-            self.wykonalRuch = True
+            self.wykonal_ruch = True
 
-    def porownajGatunek(self, drugi):
+    def porownaj_gatunek(self, drugi):
         return isinstance(drugi, Roslina)
 
     def rysowanie(self):

@@ -1,5 +1,6 @@
 from Zwierze import Zwierze
 
+
 class Wilk(Zwierze):
     def __init__(self, posY, posX, wiek=0):
         super().__init__(9, 5)
@@ -14,8 +15,8 @@ class Wilk(Zwierze):
     def rysowanie(self):
         return "W"
 
-    def porownajGatunek(self, drugi):
+    def porownaj_gatunek(self, drugi):
         return isinstance(drugi, Wilk)
-    
-    def stworzNowy(self, nowyY, nowyX):
+
+    def stworz_nowy(self, nowyY, nowyX):
         return Wilk(nowyY, nowyX)

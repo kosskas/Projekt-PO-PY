@@ -1,10 +1,11 @@
 from Zwierzeta.Owca import Owca
-from Rosliny.BarszczSosnowskiego import BarszczSosnowskiego
+import Zwierze
+#from Rosliny.BarszczSosnowskiego import BarszczSosnowskiego
 
 
 class CyberOwca(Owca):
     def __init__(self, posY, posX, wiek=0):
-        super().__init__(11, 4)
+        super(Owca, self).__init__(11, 4)
         self.x = posX
         self.y = posY
         self.wiek = wiek
@@ -16,34 +17,23 @@ class CyberOwca(Owca):
     def rysowanie(self):
         return "0"
 
-    def porownajGatunek(self, drugi):
+    def porownaj_gatunek(self, drugi):
         return isinstance(drugi, CyberOwca)
-    
-    def stworzNowy(self, nowyY, nowyX):
+
+    def stworz_nowy(self, nowyY, nowyX):
         return CyberOwca(nowyY, nowyX)
 
-    def znajdzBarszcz(self):
-        dl = 10000
-        barsY, barsX = None, None
-        for N in self.swiat.orgaznizmy:
-            if isinstance(N, BarszczSosnowskiego):
-                dist = (self.x - N.GetX())**2 + (self.y - N.GetY())**2
-                if dist < dl:
-                    dl = dist
-                    barsY =  N.GetY()
-                    barsX =  N.GetX()
-        return barsY, barsX
 
-    def nowaPozycja(self):
-         barsY, barsX = self.znajdzBarszcz()
-         if barsX is None:
-             super().nowaPozycja()
-         else:
-             if self.x < barsX:
-                 self.nextX = self.x + 1
-             elif self.x > barsX:
-                 self.nextX = self.x - 1
-             if self.y < barsY:
-                 self.nextY = self.y + 1
-             elif self.y > barsY:
-                 self.nextY = self.y - 1
+    def nowa_pozycja(self):
+        barsY, barsX = self.swiat.znajdzBarszcz(self.y, self.x)
+        if barsX is None:
+            super().nowa_pozycja()
+        else:
+            if self.x < barsX:
+                self.nextX = self.x + 1
+            elif self.x > barsX:
+                self.nextX = self.x - 1
+            if self.y < barsY:
+                self.nextY = self.y + 1
+            elif self.y > barsY:
+                self.nextY = self.y - 1

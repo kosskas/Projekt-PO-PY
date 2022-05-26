@@ -15,37 +15,37 @@ class Zwierze(Organizm):
 
 
     def akcja(self):
-        if not self.wykonalRuch:
-            self.nowaPozycja()
-            kolizyjny = self.swiat.pobierzWspolrzedne(self.nextY, self.nextX)
-            self.wykonajRuchNa(kolizyjny)
+        if not self.wykonal_ruch:
+            self.nowa_pozycja()
+            kolizyjny = self.swiat.pobierz_wspolrzedne(self.nextY, self.nextX)
+            self.wykonaj_ruch_na(kolizyjny)
             self.x = self.nextX
             self.y = self.nextY
-            self.wykonalRuch = True
+            self.wykonal_ruch = True
 
-    def wykonajRuchNa(self, kolizyjny):
+    def wykonaj_ruch_na(self, kolizyjny):
         if kolizyjny is not None and kolizyjny != self:
-            if self.porownajGatunek(kolizyjny):
+            if self.porownaj_gatunek(kolizyjny):
                 self.rozmnazanie(kolizyjny)
                 self.nextX = self.x
                 self.nextY = self.y
             else:
                 kolizyjny.kolizja(self)
 
-    def nowaPozycja(self):
+    def nowa_pozycja(self):
         dy = random.randrange(-1, 1)
         dx = random.randrange(-1, 1)
-        if self.swiat.sprawdzPoprawnoscWspolrzednych(self.y + dy, self.x + dx):
+        if self.swiat.sprawdz_poprawnosc_wspolrzednych(self.y + dy, self.x + dx):
             self.nextX = self.x + dx
             self.nextY = self.y + dy
             self.prevX = self.x
             self.prevY = self.y
 
-    def wycofajSie(self):
+    def wycofaj_sie(self):
         self.nextX = self.prevX
         self.nextY = self.prevY
 
-    def porownajGatunek(self, drugi):
+    def porownaj_gatunek(self, drugi):
         return isinstance(drugi, Zwierze)
 
     def rysowanie(self):

@@ -15,16 +15,16 @@ class Lis(Zwierze):
     def rysowanie(self):
         return "L"
 
-    def porownajGatunek(self, drugi):
+    def porownaj_gatunek(self, drugi):
         return isinstance(drugi, Lis)
     
-    def stworzNowy(self, nowyY, nowyX):
+    def stworz_nowy(self, nowyY, nowyX):
         return Lis(nowyY, nowyX)
 
-    def wykonajRuchNa(self, kolizyjny):
-        if kolizyjny is not None and kolizyjny is not self and kolizyjny.GetSila() > self.sila:
+    def wykonaj_ruch_na(self, kolizyjny):
+        if kolizyjny is not None and kolizyjny is not self and kolizyjny.get_sila() > self.sila:
             print("lis")
             self.nextX = self.x
             self.nextY = self.y
         else:
-            super().wykonajRuchNa(kolizyjny)
+            super().wykonaj_ruch_na(kolizyjny)

@@ -58,6 +58,9 @@
     <Compile Include="Zwierzeta\CyberOwca.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Zwierzeta\Czlowiek.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Zwierzeta\Lis.py" />
     <Compile Include="Zwierzeta\Owca.py">
       <SubType>Code</SubType>

@@ -2,15 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1ea6411-7408-4cff-b014-7a216cbc9c37" name="Changes" comment="stan na 25.05">
-      <change afterPath="$PROJECT_DIR$/Zwierzeta/Antylopa.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Zwierzeta/Lis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Zwierzeta/Zolw.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Organizm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Organizm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjektPY.py" beforeDir="false" afterPath="$PROJECT_DIR$/ProjektPY.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjektPY.pyproj" beforeDir="false" afterPath="$PROJECT_DIR$/ProjektPY.pyproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Roslina.py" beforeDir="false" afterPath="$PROJECT_DIR$/Roslina.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rosliny/BarszczSosnowskiego.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rosliny/BarszczSosnowskiego.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rosliny/Guarana.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rosliny/Guarana.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rosliny/Mlecz.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rosliny/Mlecz.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rosliny/Trawa.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rosliny/Trawa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rosliny/WilczeJagody.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rosliny/WilczeJagody.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Rosliny/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Rosliny/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Swiat.py" beforeDir="false" afterPath="$PROJECT_DIR$/Swiat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Zwierze.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zwierze.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zwierzeta/Antylopa.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zwierzeta/Antylopa.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zwierzeta/CyberOwca.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zwierzeta/CyberOwca.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zwierzeta/Lis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zwierzeta/Lis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Zwierzeta/Owca.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zwierzeta/Owca.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Zwierzeta/Wilk.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zwierzeta/Wilk.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zwierzeta/Zolw.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zwierzeta/Zolw.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Zwierzeta/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Zwierzeta/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +42,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="29eqDkiyCmcOICcpiUM3HbkB2SW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

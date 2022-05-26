@@ -16,16 +16,16 @@ class Antylopa(Zwierze):
     def rysowanie(self):
         return "A"
 
-    def porownajGatunek(self, drugi):
+    def porownaj_gatunek(self, drugi):
         return isinstance(drugi, Antylopa)
     
-    def stworzNowy(self, nowyY, nowyX):
+    def stworz_nowy(self, nowyY, nowyX):
         return Antylopa(nowyY, nowyX)
 
-    def nowaPozycja(self):
+    def nowa_pozycja(self):
         dy = random.randrange(-2, 2)
         dx = random.randrange(-2, 2)
-        if self.swiat.sprawdzPoprawnoscWspolrzednych(self.y + dy, self.x + dx):
+        if self.swiat.sprawdz_poprawnosc_wspolrzednych(self.y + dy, self.x + dx):
             self.nextX = self.x + dx
             self.nextY = self.y + dy
             self.prevX = self.x
@@ -33,8 +33,8 @@ class Antylopa(Zwierze):
     
     def kolizja(self, atakujacy):
         if random.randrange(0, 100) <= 50:
-            self.nowaPozycja()
-            kolizyjny = self.swiat.pobierzWspolrzedne(self.nextY, self.nextX)
+            self.nowa_pozycja()
+            kolizyjny = self.swiat.pobierz_wspolrzedne(self.nextY, self.nextX)
             if kolizyjny is not None and kolizyjny is not self:
                 super().kolizja(atakujacy)
             else:

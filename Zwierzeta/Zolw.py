@@ -1,6 +1,7 @@
 from Zwierze import Zwierze
 import random
 
+
 class Zolw(Zwierze):
     def __init__(self, posY, posX, wiek=0):
         super().__init__(3, 7)
@@ -15,15 +16,21 @@ class Zolw(Zwierze):
     def rysowanie(self):
         return "Z"
 
-    def porownajGatunek(self, drugi):
+    def porownaj_gatunek(self, drugi):
         return isinstance(drugi, Zolw)
-    
-    def stworzNowy(self, nowyY, nowyX):
+
+    def stworz_nowy(self, nowyY, nowyX):
         return Zolw(nowyY, nowyX)
 
-    def nowaPozycja(self):
+    def nowa_pozycja(self):
         if random.randrange(0, 100) <= 25:
-            super().nowaPozycja
+            super().nowa_pozycja()
         else:
             self.nextX = self.x
             self.nextY = self.y
+    
+    def kolizja(self, atakujacy):
+        if atakujacy.get_sila() < 5:
+            atakujacy.wycofaj_sie()
+        else:
+            self.smierc()

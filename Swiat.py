@@ -1,7 +1,12 @@
 from Organizm import Organizm
+from Rosliny.BarszczSosnowskiego import BarszczSosnowskiego
+import Rosliny
+import Zwierzeta
 import datetime
 import random
 import sys
+
+
 class Swiat:
     plansza = []
     wymX = None
@@ -10,7 +15,7 @@ class Swiat:
     tura = 0
     seed = 0
 
-    def __init__(self, Y, X, L, ziarno = 0, runda = 0):
+    def __init__(self, Y, X, L, ziarno=0, runda=0):
         self.wymX = X
         self.wymY = Y
         for y in range(Y):
@@ -19,28 +24,27 @@ class Swiat:
                 wiersz.append("")
             self.plansza.append(wiersz)
 
-
         self.orgaznizmy = L
-        self.dodajOrganizmy(L)
+        self.dodaj_organizmy(L)
         self.seed = random.seed(2)
-        tura = 0
+        self.tura = 0
 
-    def rysujSwiat(self):
-        self.wyczyscMape()
-        self.naniesOrganizmyNaMape()
-        self.rysujMape()
+    def rysuj_swiat(self):
+        self.wyczysc_mape()
+        self.nanies_organizmy_na_mape()
+        self.rysuj_mape()
 
-    def dodajOrganizmy(self, L):
+    def dodaj_organizmy(self, L):
         self.orgaznizmy = L
         for N in self.orgaznizmy:
-            N.SetSwiat(self)
+            N.set_swiat(self)
 
-    def naniesOrganizmyNaMape(self):
+    def nanies_organizmy_na_mape(self):
         for N in self.orgaznizmy:
-            if N.czyZyje() == True:
-                self.plansza[N.GetY()][N.GetX()] = N.rysowanie()
+            if N.czy_zyje():
+                self.plansza[N.get_Y()][N.get_X()] = N.rysowanie()
 
-    def wyczyscMape(self):
+    def wyczysc_mape(self):
         self.plansza = []
         for y in range(self.wymY):
             wiersz = []
@@ -48,54 +52,67 @@ class Swiat:
                 wiersz.append(" ")
             self.plansza.append(wiersz)
 
-    def rysujMape(self):
-       for y in self.plansza:
-           print(*y, sep=" ")
+    def rysuj_mape(self):
+        for y in self.plansza:
+            print(*y, sep=" ")
 
     def symuluj(self, iter):
         for i in range(iter):
-            self.rysujSwiat()
+            self.rysuj_swiat()
             print("Tura", self.tura)
-            self.wykonajTure()
+            self.wykonaj_ture()
 
-    def zapiszSwiat(self):
+    def zapisz_swiat(self):
         with open('zapis.txt', 'w') as f:
             print("[stan]", file=f)
-            print("MAPA",self.wymY,self.wymX, file=f)
-            print("SEED",self.seed, file=f)
-            print("TURA",self.tura, file=f)
+            print("MAPA", self.wymY, self.wymX, file=f)
+            print("SEED", self.seed, file=f)
+            print("TURA", self.tura, file=f)
             print("[org]", file=f)
             for N in self.orgaznizmy:
-                print(N.rysowanie(),N.GetY(),N.GetX(),N.GetWiek(), file=f)
+                print(N.rysowanie(), N.get_Y(), N.get_X(), N.get_wiek(), file=f)
             print("[org]", file=f)
             print("[stan]", file=f)
 
-    def GetX(self):
+    def get_X(self):
         return self.wymX
 
-    def GetY(self):
+    def get_Y(self):
         return self.wymY
 
-    def sprawdzPoprawnoscWspolrzednych(self, y, x):
-        return x < self.wymX and x >= 0 and y < self.wymY and y >= 0
+    def sprawdz_poprawnosc_wspolrzednych(self, y, x):
+        return self.wymX > x >= 0 and self.wymY > y >= 0
 
-    def wykonajTure(self):
+    def wykonaj_ture(self):
         self.tura = self.tura + 1
-        self.zwolnijMiejsce()
+        self.zwolnij_miejsce()
         for N in self.orgaznizmy:
-            N.nowaTura()
-            if N.GetWiek() > -1:
+            N.nowa_tura()
+            if N.get_wiek() > -1:
                 N.akcja()
 
-    def pobierzWspolrzedne(self, y, x):
+    def pobierz_wspolrzedne(self, y, x):
         for N in self.orgaznizmy:
-            if N.GetY() == y and N.GetX() == x and N.czyZyje():
+            if N.get_Y() == y and N.get_X() == x and N.czy_zyje():
                 return N
         return None
 
-    def dodajOrganizm(self, nowy):
-        nowy.SetSwiat(self)
+    def dodaj_organizm(self, nowy):
+        nowy.set_swiat(self)
         self.orgaznizmy.append(nowy)
 
-    def zwolnijMiejsce(self):
-        self.orgaznizmy = [N for N in self.orgaznizmy if N.czyZyje()]
+    def zwolnij_miejsce(self):
+        self.orgaznizmy = [N for N in self.orgaznizmy if N.czy_zyje()]
+
+    
+    def znajdzBarszcz(self, x, y):
+        dl = 10000
+        barsY, barsX = None, None
+        for N in self.orgaznizmy:
+            if isinstance(N, BarszczSosnowskiego):
+                dist = (x - N.get_X()) ** 2 + (y - N.get_Y()) ** 2
+                if dist < dl:
+                    dl = dist
+                    barsY = N.get_Y()
+                    barsX = N.get_X()
+        return barsY, barsX
