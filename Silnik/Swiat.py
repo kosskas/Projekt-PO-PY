@@ -1,32 +1,32 @@
-from Rosliny.BarszczSosnowskiego import BarszczSosnowskiego
 import random
-import Zwierzeta
-import Rosliny
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
-class Swiat:
+import sys
+from Zwierzeta import *
+from Rosliny import *
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QLabel, QFrame, QGridLayout, QSplitter, QMainWindow
+#event listener po wcisnieciu n z w 
+class Swiat(QWidget):
     plansza = []
     wymX = None
     wymY = None
     orgaznizmy = []
     tura = 0
     seed = 0
-    app = QApplication([])
-    label = QLabel("hello wolrd")
-    #label.show()
-    #app.exec_()
-    def __init__(self, Y, X, L, ziarno=0, runda=0):
+    elemMapy = {}
+    label = None
+
+    def __init__(self, Y, X, ziarno=0, runda=0):
+        super().__init__()       
         self.wymX = X
-        self.wymY = Y
+        self.wymY = Y 
         for y in range(Y):
             wiersz = []
             for x in range(X):
                 wiersz.append("")
             self.plansza.append(wiersz)
-
-        self.orgaznizmy = L
-        self.dodaj_organizmy(L)
+        self.dodaj_organizmy(self.dodaj_bazowe_organizmy())
         self.seed = random.seed(2)
         self.tura = 0
+        self.inicjuj_okno()
 
     def rysuj_swiat(self):
         self.wyczysc_mape()
@@ -56,10 +56,13 @@ class Swiat:
             print(*y, sep=" ")
 
     def symuluj(self, iter):
-        for i in range(iter):
-            self.rysuj_swiat()
-            print("Tura", self.tura)
-            self.wykonaj_ture()
+        self.show()
+    
+
+        #for i in range(iter):
+        #    self.rysuj_swiat()
+        #    print("Tura", self.tura)
+        #    self.wykonaj_ture()
 
     def zapisz_swiat(self):
         with open('zapis.txt', 'w') as f:
@@ -115,3 +118,35 @@ class Swiat:
                     barsY = N.get_Y()
                     barsX = N.get_X()
         return barsY, barsX
+    
+    def dodaj_bazowe_organizmy(self):
+            L = [Owca(1, 1), Owca(2, 2), Owca(1, 0), Wilk(0, 0), Antylopa(4, 4),
+         BarszczSosnowskiego(5, 5), Zolw(3, 4), Trawa(6, 6), Lis(5, 7), CyberOwca(5, 6)]
+            return L
+
+    #///////////////////////////
+
+    def inicjuj_okno(self):
+        self.setGeometry(100, 100, 100, 100)   
+        
+        mapa = QGridLayout()
+        self.label = QLabel("yhtyyyyyyyyyyyyyyyyy");
+        
+        mapa.setContentsMargins(0, 0, 0, 0)
+        
+
+        mapa.setSpacing(0)
+        for i in range(self.wymY):
+            for j in range(self.wymX):
+                self.elemMapy[(i, j)] = QPushButton("")
+                self.elemMapy[(i, j)].setGeometry(50, 50, 50, 50)
+                self.elemMapy[(i, j)].setFixedSize(40, 40)
+                self.elemMapy[(i, j)].setContentsMargins(0, 0, 0, 0)
+                self.elemMapy[(i, j)].clicked.connect(self.button_clicked)
+                mapa.addWidget(self.elemMapy[(i, j)], i, j)
+        self.setLayout(mapa)
+        
+        
+    def button_clicked(self):
+            print("clicked")
+            self.label.setText("you pressed the button")
