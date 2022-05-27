@@ -1,4 +1,4 @@
-from Zwierze import Zwierze
+from Silnik.Zwierze import Zwierze
 
 
 class Wilk(Zwierze):

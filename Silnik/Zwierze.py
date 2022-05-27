@@ -1,5 +1,6 @@
-from Organizm import Organizm
+from Silnik.Organizm import Organizm
 import random
+
 
 class Zwierze(Organizm):
     nextX = None
@@ -12,7 +13,6 @@ class Zwierze(Organizm):
         self.inicjatywa = i
         self.wiek = 0
         self.zyje = True
-
 
     def akcja(self):
         if not self.wykonal_ruch:

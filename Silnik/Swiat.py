@@ -1,12 +1,8 @@
-from Organizm import Organizm
 from Rosliny.BarszczSosnowskiego import BarszczSosnowskiego
-import Rosliny
-import Zwierzeta
-import datetime
 import random
-import sys
-
-
+import Zwierzeta
+import Rosliny
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
 class Swiat:
     plansza = []
     wymX = None
@@ -14,7 +10,10 @@ class Swiat:
     orgaznizmy = []
     tura = 0
     seed = 0
-
+    app = QApplication([])
+    label = QLabel("hello wolrd")
+    #label.show()
+    #app.exec_()
     def __init__(self, Y, X, L, ziarno=0, runda=0):
         self.wymX = X
         self.wymY = Y

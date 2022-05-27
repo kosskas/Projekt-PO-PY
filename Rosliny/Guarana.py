@@ -1,4 +1,4 @@
-from Roslina import Roslina
+from Silnik.Roslina import Roslina
 
 
 class Guarana(Roslina):
@@ -18,6 +18,6 @@ class Guarana(Roslina):
         return Guarana(nowyY, nowyX)
 
     def kolizja(self, atakujacy):
-        print(atakujacy.rysowanie(), "zjadlo guarane i zwiekszylo sile do", atakujacy.get_sila())
         atakujacy.set_sila(atakujacy.get_sila() + 3)
+        print(atakujacy.rysowanie(), "zjadlo guarane i zwiekszylo sile do", atakujacy.get_sila())
         self.smierc()

@@ -1,4 +1,4 @@
-from Roslina import Roslina
+from Silnik.Roslina import Roslina
 
 
 class WilczeJagody(Roslina):
@@ -18,5 +18,6 @@ class WilczeJagody(Roslina):
         return WilczeJagody(nowyY, nowyX)
 
     def kolizja(self, atakujacy):
+        print(atakujacy.rysowanie(),"zjazdlo wilcze jagody i umarlo")
         atakujacy.smierc()
         self.smierc()

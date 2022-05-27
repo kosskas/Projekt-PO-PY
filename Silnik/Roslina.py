@@ -1,4 +1,4 @@
-from Organizm import Organizm
+from Silnik.Organizm import Organizm
 import random
 
 

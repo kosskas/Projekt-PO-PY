@@ -30,6 +30,10 @@
     <Compile Include="Rosliny\Trawa.py" />
     <Compile Include="Rosliny\WilczeJagody.py" />
     <Compile Include="Rosliny\__init__.py" />
+    <Compile Include="Silnik\Organizm.py" />
+    <Compile Include="Silnik\Roslina.py" />
+    <Compile Include="Silnik\Swiat.py" />
+    <Compile Include="Silnik\Zwierze.py" />
     <Compile Include="Swiat.py" />
     <Compile Include="Zwierze.py" />
     <Compile Include="Zwierzeta\Antylopa.py" />
@@ -42,6 +46,7 @@
     <Compile Include="Zwierzeta\__init__.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Silnik\" />
     <Folder Include="Rosliny\" />
     <Folder Include="Rosliny\__pycache__\" />
     <Folder Include="Zwierzeta\" />

@@ -1,5 +1,6 @@
 from Zwierzeta.Owca import Owca
-import Zwierze
+
+
 #from Rosliny.BarszczSosnowskiego import BarszczSosnowskiego
 
 
