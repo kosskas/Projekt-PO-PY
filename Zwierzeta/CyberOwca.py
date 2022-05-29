@@ -16,7 +16,7 @@ class CyberOwca(Owca):
         self.nextX = self.x
 
     def rysowanie(self):
-        return "0"
+        return "Ó"
 
     def porownaj_gatunek(self, drugi):
         return isinstance(drugi, CyberOwca)

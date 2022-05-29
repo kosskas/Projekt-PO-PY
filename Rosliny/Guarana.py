@@ -9,7 +9,7 @@ class Guarana(Roslina):
         self.szansa_siewu = 8
 
     def rysowanie(self):
-        return "&"
+        return "@"
 
     def porownaj_gatunek(self, drugi):
         return isinstance(drugi, Guarana)

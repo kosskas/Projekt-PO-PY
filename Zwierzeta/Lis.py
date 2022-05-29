@@ -23,7 +23,7 @@ class Lis(Zwierze):
 
     def wykonaj_ruch_na(self, kolizyjny):
         if kolizyjny is not None and kolizyjny is not self and kolizyjny.get_sila() > self.sila:
-            print("lis")
+            print("lis nie wykonuje ruchu na",kolizyjny.rysowanie())
             self.nextX = self.x
             self.nextY = self.y
         else:
