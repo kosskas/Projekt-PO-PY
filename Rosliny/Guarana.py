@@ -6,7 +6,7 @@ class Guarana(Roslina):
         super().__init__(0)
         self.x = posX
         self.y = posY
-        self.szansa_siewu = 8
+        self.szansa_siewu = 4
 
     def rysowanie(self):
         return "@"

@@ -1,5 +1,7 @@
 import random
 import sys
+import time
+from datetime import datetime
 from Zwierzeta import *
 from Rosliny import *
 from PyQt5.QtWidgets import *
@@ -8,6 +10,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
 class Swiat(QMainWindow):
+    #zywotnosc dla org
     plansza = []
     wymX = None
     wymY = None
@@ -19,12 +22,12 @@ class Swiat(QMainWindow):
     pressY, pressX = None, None
     btn_Y, btn_X =  100, 50
 
-    def __init__(self, Y, X, ziarno=0, runda=0):
+    def __init__(self, Y, X):
         super().__init__()       
         self.wymX = X
         self.wymY = Y 
         self.dodaj_organizmy(self.dodaj_bazowe_organizmy())
-        self.inicjuj_gre(ziarno, runda)
+        self.inicjuj_gre(int(time.time() * 256), 0)
         self.inicjuj_okno()
 
 
@@ -33,7 +36,8 @@ class Swiat(QMainWindow):
         self.tura = runda
         
         self.seed = ziarno
-        random.seed(self.seed)
+        random.seed(ziarno)
+
         for y in range(self.wymY):
             wiersz = []
             for x in range(self.wymX):
@@ -188,7 +192,7 @@ class Swiat(QMainWindow):
         self.zwolnij_miejsce()
         for N in self.orgaznizmy:
             N.nowa_tura()
-            if N.get_wiek() > 0:
+            if N.get_wiek() > 1 and N.czy_zyje():
                 N.akcja()
 
     def nowa_tura(self):
@@ -307,7 +311,13 @@ class Swiat(QMainWindow):
         wczytaj.clicked.connect(self.wczytaj_gre_akcja)
 
     def dodaj_organizm_akcja(self):
-            print("clicked")
+        button = self.sender()
+        for i in range(self.wymY):
+            for j in range(self.wymX):
+                if self.elemMapy[i][j] == button:
+                    org = self.pobierz_wspolrzedne(i, j)
+                    print("Gat",org.rysowanie(), "Wiek",org.get_wiek())
+
 
     def zapisz_gre_akcja(self):
         self.zapisz_swiat()

@@ -23,6 +23,7 @@ class Organizm:
                         dziecko = self.stworz_nowy(self.y + dy, self.x + dx)
                         if dziecko is not None:
                             self.swiat.dodaj_organizm(dziecko)
+                            return
                         break
 
     def smierc(self):

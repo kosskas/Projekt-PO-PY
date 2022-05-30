@@ -9,7 +9,7 @@ class BarszczSosnowskiego(Roslina):
         super().__init__(10)
         self.x = posX
         self.y = posY
-        self.szansa_siewu = 3
+        self.szansa_siewu = 2
 
     def rysowanie(self):
         return "$"

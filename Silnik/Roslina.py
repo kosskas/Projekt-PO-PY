@@ -13,7 +13,7 @@ class Roslina(Organizm):
 
     def akcja(self):
         if not self.wykonal_ruch:
-            if random.randrange(0, 100) <= self.szansa_siewu:
+            if  random.randrange(0, 100) <= self.szansa_siewu:
                 self.rozmnazanie(self)
             self.wykonal_ruch = True
 

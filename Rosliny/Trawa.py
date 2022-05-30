@@ -6,7 +6,7 @@ class Trawa(Roslina):
         super().__init__(0)
         self.x = posX
         self.y = posY
-        self.szansa_siewu = 33
+        self.szansa_siewu = 10
 
     def rysowanie(self):
         return "#"
