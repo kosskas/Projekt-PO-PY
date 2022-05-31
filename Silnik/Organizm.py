@@ -41,6 +41,16 @@ class Organizm:
             print(atakujacy.rysowanie(),"[",atakujacy.get_sila(), "] zabil ", self.rysowanie(),"[",self.get_sila(),"]")
             self.smierc()
 
+
+
+    def __lt__(self, inny):
+        if self.inicjatywa < inny.inicjatywa:
+            return True
+        elif self.inicjatywa == inny.inicjatywa:
+            return self.wiek < inny.wiek
+        else:
+            return False
+
     def set_swiat(self, S):
         self.swiat = S
 

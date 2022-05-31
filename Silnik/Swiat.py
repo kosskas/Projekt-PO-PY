@@ -191,6 +191,8 @@ class Swiat(QMainWindow):
         self.tura = self.tura + 1
         self.zwolnij_miejsce()
         for N in self.orgaznizmy:
+            print(N.rysowanie(), sep="")
+        for N in self.orgaznizmy:
             N.nowa_tura()
             if N.get_wiek() > 1 and N.czy_zyje():
                 N.akcja()
@@ -211,6 +213,7 @@ class Swiat(QMainWindow):
 
     def zwolnij_miejsce(self):
         self.orgaznizmy = [N for N in self.orgaznizmy if N.czy_zyje()]
+       # self.orgaznizmy = sorted(self.orgaznizmy)
 
     
     def znajdzBarszcz(self, x, y):
@@ -238,25 +241,25 @@ class Swiat(QMainWindow):
         elif org == '%': #WilczeJagody
             return "#9249A9"
         elif org == '*': #Mlecz d
-            return "#F5EE15"
+            return "#ECF174"
         elif org == '#': #Trawa d
-            return "#42EE13"
+            return "#0DA416"#"#42EE13"
         elif org == '@': #Guarana d
             return "#E85B2E" 
         elif org == 'O': #Owca d
             return "#E7E7DB"
         elif org == 'Ó': #cyberowca d
-            return "#8C610F"
+            return "#AFA799"
         elif org == 'A': #antylopa d
-            return "#EB7E10"  
+            return "#BE8D0B"  
         elif org == 'L': #lis d
-            return "#438DCF"
+            return "#EB7E10"
         elif org == 'C': #czlowiek d
-            return "#3B3A3A"
+            return "#139ABE"
         elif org == 'W': #wilk d
-            return "#F5EE15"
+            return "#3B3A3A"
         elif org == 'Z': #zolw d
-            return "#9249A9"
+            return "#888A88"
 
     #///////////////////////////
 
