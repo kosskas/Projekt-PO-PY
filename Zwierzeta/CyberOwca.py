@@ -1,12 +1,9 @@
-from Zwierzeta.Owca import Owca
+from Silnik.Zwierze import Zwierze
 
 
-#from Rosliny.BarszczSosnowskiego import BarszczSosnowskiego
-
-
-class CyberOwca(Owca):
+class CyberOwca(Zwierze):
     def __init__(self, posY, posX, wiek=0):
-        super(Owca, self).__init__(11, 4)
+        super().__init__(11, 4)
         self.x = posX
         self.y = posY
         self.wiek = wiek

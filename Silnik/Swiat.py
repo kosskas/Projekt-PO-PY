@@ -21,7 +21,8 @@ class Swiat(QMainWindow):
     label = None
     pressY, pressX = None, None
     btn_Y, btn_X =  100, 50
-
+    sterowanie = None
+    ruch = [0, 0]
     def __init__(self, Y, X):
         super().__init__()       
         self.wymX = X
@@ -177,7 +178,6 @@ class Swiat(QMainWindow):
             self.wymX = x
             self.inicjuj_gre(ziarno, runda)
 
-
     def get_X(self):
         return self.wymX
 
@@ -190,8 +190,7 @@ class Swiat(QMainWindow):
     def wykonaj_ture(self):
         self.tura = self.tura + 1
         self.zwolnij_miejsce()
-        for N in self.orgaznizmy:
-            print(N.rysowanie(), sep="")
+        
         for N in self.orgaznizmy:
             N.nowa_tura()
             if N.get_wiek() > 1 and N.czy_zyje():
@@ -213,7 +212,6 @@ class Swiat(QMainWindow):
 
     def zwolnij_miejsce(self):
         self.orgaznizmy = [N for N in self.orgaznizmy if N.czy_zyje()]
-       # self.orgaznizmy = sorted(self.orgaznizmy)
 
     
     def znajdzBarszcz(self, x, y):
@@ -229,9 +227,10 @@ class Swiat(QMainWindow):
         return barsY, barsX
     
     def dodaj_bazowe_organizmy(self):
-        L = [Owca(1, 1), Owca(2, 2), Owca(1, 0), Wilk(0, 0), Antylopa(4, 4),
-         BarszczSosnowskiego(5, 5), Zolw(3, 4), Trawa(6, 6), Lis(5, 7), CyberOwca(5, 6), Mlecz(9, 6),
-        Guarana(10, 8), WilczeJagody(4, 8)]
+        L = [Czlowiek(0,0), Owca(1,0), Owca(0,1), BarszczSosnowskiego(4,0), BarszczSosnowskiego(3, 4),
+             Lis(5,4), Lis(4,3), Zolw(7,7), Zolw(1,9), Owca(7,8), Trawa(7,2), Mlecz(8,5), Guarana(2,7),
+             Antylopa(8,3), Antylopa(6,7), Antylopa(8,7), Antylopa(2,2), WilczeJagody(5,7), Wilk(3,6),
+             Wilk(3,5), CyberOwca(9,7)]
         return L
 
     def koloruj_guzik(self, y, x):
@@ -280,6 +279,7 @@ class Swiat(QMainWindow):
         self.inicjuj_nowa_tura_guzik()
         self.inicjuj_zapisz_guzik()
         self.inicjuj_wczytaj_guzik()
+        self.inicjuj_strzalki_guzik()
 
     def inicjuj_mape(self):
         for i in range(self.wymY):
@@ -313,6 +313,23 @@ class Swiat(QMainWindow):
         wczytaj.setGeometry(self.wymY*40+50+2*self.btn_Y ,20, self.btn_Y, self.btn_X)
         wczytaj.clicked.connect(self.wczytaj_gre_akcja)
 
+    def inicjuj_strzalki_guzik(self):
+        self.sterowanie = { "Gora" : QPushButton("\u2191", self), "Dol" : QPushButton("\u2193", self),
+                          "Lewo": QPushButton("\u2190", self), "Prawo": QPushButton("\u2192", self),
+                         "Ult": QPushButton("Ult", self) } 
+        x, y = 50, 50
+        self.sterowanie["Gora"].setGeometry(self.wymY*40+50+self.btn_Y ,250, y, x) #gora
+        self.sterowanie["Gora"].setFont(QFont('Times', 20))
+        self.sterowanie["Ult"].setGeometry(self.wymY*40+50+self.btn_Y ,300, y, x) #dol
+        self.sterowanie["Dol"].setGeometry(self.wymY*40+50+self.btn_Y ,350, y, x)
+        self.sterowanie["Dol"].setFont(QFont('Times', 20))
+        self.sterowanie["Lewo"].setGeometry(self.wymY*40+50+self.btn_Y-y ,300, y, x)
+        self.sterowanie["Lewo"].setFont(QFont('Times', 20))
+        self.sterowanie["Prawo"].setGeometry(self.wymY*40+50+self.btn_Y+y ,300, y, x)
+        self.sterowanie["Prawo"].setFont(QFont('Times', 20))
+        for i in self.sterowanie:
+            self.sterowanie[i].clicked.connect(self.ruch_czlowieka_akcja)
+
     def dodaj_organizm_akcja(self):
         button = self.sender()
         for i in range(self.wymY):
@@ -337,6 +354,22 @@ class Swiat(QMainWindow):
         self.aktualizuj_mape()
         self.setWindowTitle("Symulator swiata - tura "+str(self.tura))
 
-    def keyPressEvent(self, e):
-        if e.key() == Qt.Key_Space:
-            print("spacja")
+    def ruch_czlowieka_akcja(self):
+        button = self.sender()
+        for i in self.sterowanie:
+            if self.sterowanie[i] == button:
+                if i == "Gora":
+                    print("Gora")
+                    self.ruch = [-1, 0]
+                elif i == "Dol":
+                    print("Dol")
+                    self.ruch = [1, 0]
+                elif i == "Lewo":
+                    print("Lewo")
+                    self.ruch = [0, -1]
+                elif i == "Prawo":
+                    print("Prawo")
+                    self.ruch = [0, 1]
+                else:
+                    print("Ult")
+                    self.ruch = ["u", "u"]

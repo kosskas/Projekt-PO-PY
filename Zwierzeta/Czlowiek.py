@@ -29,6 +29,19 @@ class Czlowiek(Zwierze):
     def stworz_nowy(self, nowyY, nowyX):
         return None
 
+    def nowa_pozycja(self):
+        dy,dx = self.swiat.ruch[1],self.swiat.ruch[0]
+        if dy == "u":
+            self.wypij_magiczny_eliksir()
+            self.swiat.sterowanie["Ult"].setEnabled(False);
+            return
+        else:
+            if self.swiat.sprawdz_poprawnosc_wspolrzednych(self.y + dy, self.x + dx):
+                self.nextX = self.x + dx
+                self.nextY = self.y + dy
+                self.prevX = self.x
+                self.prevY = self.y
+
     def nowa_tura(self):
         if self.czy_aktywna_umj:
             self.czas_trwania = self.czas_trwania - 1
@@ -40,6 +53,7 @@ class Czlowiek(Zwierze):
             self.czas_oczekiw = self.czas_oczekiw - 1
             if self.czas_oczekiw is 0:
                 print("Zdolnosc gotowa do uzycia")
+                self.swiat.sterowanie["Ult"].setEnabled(True);
                 self.czy_moze_uzyc = True
         super().nowa_tura()
 
@@ -49,6 +63,3 @@ class Czlowiek(Zwierze):
         self.czy_aktywna_umj = True
         self.czy_moze_uzyc = False
         self.sila = 10
-
-    def nowa_pozycja(self):
-        return super().nowa_pozycja()
