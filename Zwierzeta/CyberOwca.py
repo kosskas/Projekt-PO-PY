@@ -19,7 +19,7 @@ class CyberOwca(Zwierze):
         return isinstance(drugi, CyberOwca)
 
     def stworz_nowy(self, nowyY, nowyX):
-        return CyberOwca(nowyY, nowyX)
+        return None
 
 
     def nowa_pozycja(self):

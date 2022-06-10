@@ -10,7 +10,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
 class Swiat(QMainWindow):
-    #zywotnosc dla org
     plansza = []
     wymX = None
     wymY = None
@@ -22,15 +21,21 @@ class Swiat(QMainWindow):
     pressY, pressX = None, None
     btn_Y, btn_X =  100, 50
     sterowanie = None
+    dodawanie = None
     ruch = [0, 0]
+    keyPressed = QtCore.pyqtSignal(QtCore.QEvent)
+    dodaj = []
+    text = None
+
     def __init__(self, Y, X):
         super().__init__()       
+        print("Poruszanie na WSAD")
         self.wymX = X
         self.wymY = Y 
         self.dodaj_organizmy(self.dodaj_bazowe_organizmy())
         self.inicjuj_gre(int(time.time() * 256), 0)
         self.inicjuj_okno()
-
+        self.keyPressed.connect(self.ruch_czlowieka)
 
     def inicjuj_gre(self, ziarno, runda):
         self.plansza = []
@@ -279,7 +284,7 @@ class Swiat(QMainWindow):
         self.inicjuj_nowa_tura_guzik()
         self.inicjuj_zapisz_guzik()
         self.inicjuj_wczytaj_guzik()
-        self.inicjuj_strzalki_guzik()
+        self.inicjuj_dodawanie_guziki()
 
     def inicjuj_mape(self):
         for i in range(self.wymY):
@@ -295,7 +300,6 @@ class Swiat(QMainWindow):
 												x*j+20,
 												40, 40)
                 self.elemMapy[i][j].setContentsMargins(0, 0, 0, 0)
-                #self.elemMapy[i][j].setEnabled(False)
                 self.elemMapy[i][j].clicked.connect(self.dodaj_organizm_akcja)
 
     def inicjuj_nowa_tura_guzik(self):
@@ -313,30 +317,50 @@ class Swiat(QMainWindow):
         wczytaj.setGeometry(self.wymY*40+50+2*self.btn_Y ,20, self.btn_Y, self.btn_X)
         wczytaj.clicked.connect(self.wczytaj_gre_akcja)
 
-    def inicjuj_strzalki_guzik(self):
-        self.sterowanie = { "Gora" : QPushButton("\u2191", self), "Dol" : QPushButton("\u2193", self),
-                          "Lewo": QPushButton("\u2190", self), "Prawo": QPushButton("\u2192", self),
-                         "Ult": QPushButton("Ult", self) } 
-        x, y = 50, 50
-        self.sterowanie["Gora"].setGeometry(self.wymY*40+50+self.btn_Y ,250, y, x) #gora
-        self.sterowanie["Gora"].setFont(QFont('Times', 20))
-        self.sterowanie["Ult"].setGeometry(self.wymY*40+50+self.btn_Y ,300, y, x) #dol
-        self.sterowanie["Dol"].setGeometry(self.wymY*40+50+self.btn_Y ,350, y, x)
-        self.sterowanie["Dol"].setFont(QFont('Times', 20))
-        self.sterowanie["Lewo"].setGeometry(self.wymY*40+50+self.btn_Y-y ,300, y, x)
-        self.sterowanie["Lewo"].setFont(QFont('Times', 20))
-        self.sterowanie["Prawo"].setGeometry(self.wymY*40+50+self.btn_Y+y ,300, y, x)
-        self.sterowanie["Prawo"].setFont(QFont('Times', 20))
-        for i in self.sterowanie:
-            self.sterowanie[i].clicked.connect(self.ruch_czlowieka_akcja)
+
+    def inicjuj_dodawanie_guziki(self):
+        self.dodawanie = { "Wilk" : QPushButton("Wilk", self), "Antylopa" : QPushButton("Antylopa", self), "CyberOwca" : QPushButton("CyberOwca", self),
+                           "Owca": QPushButton("Owca", self), "Lis": QPushButton("Lis", self),  "Zolw" : QPushButton("Zolw", self),
+                           "BarszczSosnowskiego" : QPushButton("BarszczSosnowskiego", self), "Guarana" : QPushButton("Guarana", self),
+                           "Mlecz" : QPushButton("Mlecz", self), "Trawa" : QPushButton("Trawa", self), "WilczeJagody" :  QPushButton("WilczeJagody", self)}
+
+        y, x= 150, 50
+        posY = self.wymY*40+50+self.btn_Y
+        posX = 150
+        self.text = QLabel("test", self)
+        self.text.setGeometry(posY ,posX-x, y, x)
+        for B in self.dodawanie:
+            self.dodawanie[B].setGeometry(posY ,posX, y, x)
+            self.dodawanie[B].clicked.connect(self.dodaj_konkretny_organizm_akcja)
+            posX+=x
+
 
     def dodaj_organizm_akcja(self):
         button = self.sender()
         for i in range(self.wymY):
             for j in range(self.wymX):
-                if self.elemMapy[i][j] == button:
-                    org = self.pobierz_wspolrzedne(i, j)
-                    print("Gat",org.rysowanie(), "Wiek",org.get_wiek())
+                if self.elemMapy[i][j] == button and self.plansza[i][j] == " ":
+                    self.dodaj = [i, j]
+                    self.text.setText("Dodaj na "+str(self.dodaj))
+                    return
+                else:
+                    self.dodaj = [-1, -1]
+                    self.text.setText("Nie mozna tu postawic")
+
+    def dodaj_konkretny_organizm_akcja(self):
+        button = self.sender()
+        if self.dodaj == [-1, -1]:
+            print("Nie")
+            return
+        for B in self.dodawanie:
+            if self.dodawanie[B] == button:
+                Org = globals()[B]
+                nowy = Org(self.dodaj[0], self.dodaj[1])
+                self.dodaj_organizm(nowy)
+                self.rysuj_swiat()
+                self.aktualizuj_mape()
+                self.dodaj = [-1, -1]
+                return
 
 
     def zapisz_gre_akcja(self):
@@ -354,22 +378,23 @@ class Swiat(QMainWindow):
         self.aktualizuj_mape()
         self.setWindowTitle("Symulator swiata - tura "+str(self.tura))
 
-    def ruch_czlowieka_akcja(self):
-        button = self.sender()
-        for i in self.sterowanie:
-            if self.sterowanie[i] == button:
-                if i == "Gora":
-                    print("Gora")
-                    self.ruch = [-1, 0]
-                elif i == "Dol":
-                    print("Dol")
-                    self.ruch = [1, 0]
-                elif i == "Lewo":
-                    print("Lewo")
-                    self.ruch = [0, -1]
-                elif i == "Prawo":
-                    print("Prawo")
-                    self.ruch = [0, 1]
-                else:
-                    print("Ult")
-                    self.ruch = ["u", "u"]
+    def keyPressEvent(self, event):
+        super().keyPressEvent(event)
+        self.keyPressed.emit(event)
+
+    def ruch_czlowieka(self, event):
+        if event.key() == QtCore.Qt.Key_W:
+            print("Gora")
+            self.ruch = [-1, 0]
+        elif event.key() == QtCore.Qt.Key_S:
+            print("Dol")
+            self.ruch = [1, 0]
+        elif event.key() == QtCore.Qt.Key_A:
+            print("Lewo")
+            self.ruch = [0, -1]
+        elif event.key() == QtCore.Qt.Key_D:
+            print("Prawo")
+            self.ruch = [0, 1]
+        elif event.key() == QtCore.Qt.Key_U:
+            print("Ult")
+            self.ruch = ["u", "u"]

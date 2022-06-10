@@ -46,12 +46,12 @@ class Czlowiek(Zwierze):
         if self.czy_aktywna_umj:
             self.czas_trwania = self.czas_trwania - 1
             self.sila = self.sila - 1
-            if self.czas_trwania is 0:
+            if self.czas_trwania == 0:
                 print("Zdolnosc przestala dzialac")
                 self.czy_aktywna_umj = False
         elif not self.czy_moze_uzyc:
             self.czas_oczekiw = self.czas_oczekiw - 1
-            if self.czas_oczekiw is 0:
+            if self.czas_oczekiw == 0:
                 print("Zdolnosc gotowa do uzycia")
                 self.swiat.sterowanie["Ult"].setEnabled(True);
                 self.czy_moze_uzyc = True

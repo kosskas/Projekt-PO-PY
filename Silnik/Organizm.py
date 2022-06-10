@@ -35,10 +35,10 @@ class Organizm:
 
     def kolizja(self, atakujacy):
         if self.czy_odbil_atak(atakujacy):
-            print(self.rysowanie(),"[",self.get_sila(), "] zabil ", atakujacy.rysowanie(),"[",atakujacy.get_sila(),"]")
+            print(self.rysowanie(),self.y, self.x,"[",self.get_sila(), "] zabil ", atakujacy.rysowanie(),atakujacy.y, atakujacy.x,"[",atakujacy.get_sila(),"]")
             atakujacy.smierc()
         else:
-            print(atakujacy.rysowanie(),"[",atakujacy.get_sila(), "] zabil ", self.rysowanie(),"[",self.get_sila(),"]")
+            print(atakujacy.rysowanie(),atakujacy.y, atakujacy.x,"[",atakujacy.get_sila(), "] zabil ", self.rysowanie(),self.y, self.x,"[",self.get_sila(),"]")
             self.smierc()
 
 

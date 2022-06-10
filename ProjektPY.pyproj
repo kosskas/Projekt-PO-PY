@@ -21,9 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Organizm.py" />
     <Compile Include="ProjektPY.py" />
-    <Compile Include="Roslina.py" />
     <Compile Include="Rosliny\BarszczSosnowskiego.py" />
     <Compile Include="Rosliny\Guarana.py" />
     <Compile Include="Rosliny\Mlecz.py" />
@@ -34,8 +32,6 @@
     <Compile Include="Silnik\Roslina.py" />
     <Compile Include="Silnik\Swiat.py" />
     <Compile Include="Silnik\Zwierze.py" />
-    <Compile Include="Swiat.py" />
-    <Compile Include="Zwierze.py" />
     <Compile Include="Zwierzeta\Antylopa.py" />
     <Compile Include="Zwierzeta\CyberOwca.py" />
     <Compile Include="Zwierzeta\Czlowiek.py" />

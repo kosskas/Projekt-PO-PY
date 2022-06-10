@@ -35,7 +35,7 @@ class Antylopa(Zwierze):
         if random.randrange(0, 100) <= 50:
             self.nowa_pozycja()
             kolizyjny = self.swiat.pobierz_wspolrzedne(self.nextY, self.nextX)
-            if kolizyjny is not None and kolizyjny is not self:
+            if kolizyjny is not None and kolizyjny != self:
                 super().kolizja(atakujacy)
             else:
                 self.x = self.nextX
