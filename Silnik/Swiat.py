@@ -78,22 +78,8 @@ class Swiat(QMainWindow):
 
     def zapisz_swiat(self):
         with open('zapis.txt', 'w') as f:
-            print("[stan]", file=f)
-            print("MAPA",file=f)
-            print(self.wymY, file=f)
-            print(self.wymX, file=f)
-            print("SEED", file=f)
-            print(self.seed, file=f)
-            print("TURA", file=f)
-            print(self.tura, file=f)
-            print("[org]", file=f)
             for N in self.orgaznizmy:
-                print(N.rysowanie(), file=f)
-                print(N.get_Y(), file=f)
-                print(N.get_X(), file=f)
-                print(N.get_wiek(), file=f)
-            print("[org]", file=f)
-            print("[stan]", file=f)
+                f.write(type(N).__name__+" "+str(N.get_Y())+" "+str(N.get_X())+" "+str(N.get_wiek())+'\n')
 
     def wczytaj_swiat(self):
         with open("zapis.txt") as f:
@@ -104,84 +90,15 @@ class Swiat(QMainWindow):
 
     def wczytaj_gre(self, gra):
         L = []
-        y, x = None, None
-        ziarno, runda = 0, 0
         posX, posY, wiek = None, None, None
-        for i in range(0, len(gra)):
-            if gra[i] == "MAPA\n":
-                y = int(gra[i+1])
-                x = int(gra[i+2])
-            if gra[i] == "SEED\n":
-                ziarno = int(gra[i+1])
-            if gra[i] == "TURA\n":
-                runda = int(gra[i+1])
-            if gra[i] == "W\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(Wilk(posY, posX, wiek))
-            if gra[i] == "O\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(Owca(posY, posX, wiek))
-            if gra[i] == "L\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(Lis(posY, posX, wiek))
-            if gra[i] == "A\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(Antylopa(posY, posX, wiek))
-            if gra[i] == "Z\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(Zolw(posY, posX, wiek))
-            if gra[i] == "C\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(Czlowiek(posY, posX, wiek))
-            if gra[i] == "Ó\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(CyberOwca(posY, posX, wiek))
-            if gra[i] == "$\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(BarszczSosnowskiego(posY, posX, wiek))
-            if gra[i] == "%\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(WilczeJagody(posY, posX, wiek))
-            if gra[i] == "#\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(Trawa(posY, posX, wiek))
-            if gra[i] == "*\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(Mlecz(posY, posX, wiek))
-            if gra[i] == "@\n":
-                posY = int(gra[i+1])
-                posX = int(gra[i+2])
-                wiek = int(gra[i+3])
-                L.append(Guarana(posY, posX, wiek))
-        if y is not None and x is not None and L:
+        Org = None
+        for line in gra:
+            Org, posY, posX, wiek = line.split()
+            Org = globals()[Org]
+            L.append(Org(int(posY), int(posX), int(wiek)))
+            
+        if L:
             self.dodaj_organizmy(L)
-            self.tura = runda
-            self.seed = ziarno
-            self.wymY = y
-            self.wymX = x
-            self.inicjuj_gre(ziarno, runda)
 
     def get_X(self):
         return self.wymX
@@ -296,9 +213,7 @@ class Swiat(QMainWindow):
         y = 40
         for i in range(self.wymY):
             for j in range(self.wymX):
-                self.elemMapy[i][j].setGeometry(y*i+20,
-												x*j+20,
-												40, 40)
+                self.elemMapy[i][j].setGeometry(y*i+20,x*j+20,40, 40)
                 self.elemMapy[i][j].setContentsMargins(0, 0, 0, 0)
                 self.elemMapy[i][j].clicked.connect(self.dodaj_organizm_akcja)
 
